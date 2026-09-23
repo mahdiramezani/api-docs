@@ -180,6 +180,16 @@ Some settings flags may be ignored if the flag is not relevant to the request ty
       <li>This field is still respected if <code>DoNotAddGroupAssignments</code> is set.</li>
     </td>
   </tr>
+  <tr>
+    <td>RemoveFromUnlistedBusinessHierarchies</td>
+    <td>
+      <li>Required Platform Version: V6.6.30.0 or higher.</li>
+      <li>Existing users only.</li>
+      <li>Type = Boolean.</li>
+      <li>Default value = false.</li>
+      <li>Remove user hierarchies that are not specified in the <code>BusinessHierarchyCodes</code> field.</li>
+    </td>
+  </tr>
 </table>
 
 #### Employee Fields
@@ -562,6 +572,26 @@ Payload fields that are associated with the user record to be created or updated
       <li>h, hh = hour (12-hour format); H, HH = hour (24-hour format); m = minutes; s = seconds; tt = A.M. or P.M.</li>
     </td>
   </tr>
+  <tr>
+    <td>LogonBusinessHierarchyCode</td>
+    <td>
+      <li>Required Platform Version: V6.6.30.0 or higher.</li>
+      <li>Set to unique code of the Business Hierarchy.</li>
+      <li>Return error if code does not exists.</li>
+      <li>Set to null, empty or whitespaces to clear it.</li>
+    </td>
+  </tr>
+  <tr>
+    <td>BusinessHierarchyCodes</td>
+    <td>
+      <li>Required Platform Version: V6.6.30.0 or higher.</li>
+      <li>Semicolon-separated list of business hierarchy codes</li>
+      <li>Return error if any code does not exists.</li>
+      <li>If not present then will do nothing.</li>
+      <li>Duplicates will be ignored.</li>
+      <li>Work with setting RemoveFromUnlistedBusinessHierarchies.</li>
+    </td>
+  </tr>
 </table>
 
 > Example Request Body
@@ -622,7 +652,10 @@ Payload fields that are associated with the user record to be created or updated
   "ShortDate": "M/d/yyyy",
   "ShortTime": "h:mm tt",
 
-  "Groups": "Claims Administrator(01E4C606-2F03-4044-B6B1-079AE288D82A);7F50AC4D-93F4-4DF9-90AF-00D7DF663720"
+  "Groups": "Claims Administrator(01E4C606-2F03-4044-B6B1-079AE288D82A);7F50AC4D-93F4-4DF9-90AF-00D7DF663720",
+  "LogonBusinessHierarchyCode": "TopBH",
+  "BusinessHierarchyCodes": "NA;US;CA;MX",
+  "RemoveFromUnlistedBusinessHierarchies" : true
 }
 ```
 
