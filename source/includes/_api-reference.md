@@ -193,9 +193,9 @@ The following are not counted towards these limits:
 ### Quota headers
 Quota details may be passed back to the API user/application via response headers.
 
-Header | Description | Sample value
----------- | ------- | -------
-Retry-After	| Time in seconds to wait before retrying the request after rate limit is exceeded. | 600
+Header | Description
+---------- | -------
+Retry-After	| Time in seconds to wait before retrying the request after a rate limit or daily cap is exceeded. The value is set dynamically based on current usage, so always read it from the response rather than using a fixed wait time.
 
 ### Best Practices
 
